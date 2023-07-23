@@ -57,7 +57,6 @@ if (isset($_GET['id'])) {
 
 
     <!-- Details -->
-
     <div class="container mt-5">
         <section id="prodetails" class="section-p1">
             <div class="single-pro-image">
@@ -94,6 +93,17 @@ if (isset($_GET['id'])) {
                         <option>XXL</option>
                     </select>
                 </div>
+                <div class="color-content">
+                    <h4>Select Color</h4>
+                    <div class="color-groups">
+                        <div class="color color-white active-color"></div>
+                        <div class="color color-black"></div>
+                        <div class="color color-red"></div>
+                        <div class="color color-blue"></div>
+                        <div class="color color-yellow"></div>
+                    </div>
+                </div>
+
                 <div class="mt-3">
                     <span class="fs-6">Quantity</span>
                     <input type="number" value="1">
@@ -111,6 +121,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <script>
+        // Details
         var MainImg = document.getElementById("MainImg");
         var smallimg = document.getElementsByClassName("small-img");
 
@@ -125,6 +136,27 @@ if (isset($_GET['id'])) {
         }
         smallimg[3].onclick = function() {
             MainImg.src = smallimg[3].src;
+        }
+
+        // Color
+        const COLOR_BTNS = document.querySelectorAll('.color');
+        COLOR_BTNS.forEach(color => {
+            color.addEventListener('click', () => {
+                let colorNameClass = color.className;
+                if (!color.classList.contains('active-color')) {
+                    let colorName = colorNameClass.slice(colorNameClass.indexOf('-') + 1, colorNameClass.length);
+                    resetActiveBtns();
+                    color.classList.add('active-color');
+
+                }
+            });
+        })
+
+        //resetting all color btns
+        function resetActiveBtns() {
+            COLOR_BTNS.forEach(color => {
+                color.classList.remove('active-color');
+            });
         }
     </script>
 

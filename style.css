@@ -63,7 +63,6 @@
     padding-top: 30px;
 }
 
-
 #prodetails .single-pro-details h2 {
     font-size: 26px;
 }
@@ -95,6 +94,59 @@
     line-height: 25px;
 }
 
+/* Color */
+.color-content {
+    margin-top: 1rem;
+}
+
+.color-content h4 {
+    text-transform: capitalize;
+    font-size: 1.6rem;
+}
+
+.color {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border-radius: 50%;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: all 0.5 ease;
+}
+
+.color-black {
+    background-color: #000;
+}
+
+.color-blue {
+    background-color: #0013FF;
+}
+
+.color-yellow {
+    background-color: #FFF300;
+}
+
+.color-red {
+    background-color: #FF0000;
+}
+
+.color-white {
+    background-color: #ededed;
+}
+
+.color:hover {
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.active-color {
+    box-shadow: 0 0 10px 0 rgba(19, 23, 34, 0.6);
+    border: 3px solid #ffdb66;
+}
+
+.color-groups {
+    padding: 1rem 0;
+    display: flex;
+}
 
 /* Media size */
 @media screen and (max-width: 477px) {
@@ -114,4 +166,17 @@
         width: 100%;
         padding-top: 30px;
     }
+
+    /* Color */
+    .color-groups {
+        display: flex;
+    }
+
+    .color:last-child {
+        margin-right: 0;
+    }
+}
+
+.bor{
+    border: 1px solid #000;
 }
