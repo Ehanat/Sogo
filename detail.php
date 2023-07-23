@@ -54,6 +54,7 @@ if (isset($_GET['id'])) {
         </div>
     </nav>
 
+
     <div class="container mt-4">
         <div class="row">
             <div class="col-7">
@@ -72,8 +73,6 @@ if (isset($_GET['id'])) {
                                 <img src="assets/uploads/<?php echo $product['image4'] ?>" alt="" height="180px" width="150px"> <br>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
