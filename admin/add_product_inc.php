@@ -39,14 +39,23 @@ if (isset($_POST['add_product'])) {
     $product_name = $_POST['product_name'];
     $product_price = $_POST['product_price'];
     $product_qty = $_POST['product_qty'];
-    $description = $_POST['description'];
-    $size = $_POST['size'];
-    $color = $_POST['color'];
+    $descriptions = $_POST['description'];
+    $sizes = $_POST['scales'];
+    $size_list = '';
+    foreach ($sizes as $size) {
+        $size_list = $size_list . "," . $size;
+    }
+    $colors = $_POST['Colors'];
+    $color_list = '';
+    foreach ($colors as $color) {
+        $color_list = $color_list . "," . $color;
+    }
+
     $category = $_POST['category'];
 
     $fileNames = ['image1', 'image2', 'image3', 'image4', 'video'];
     try {
-        $sql = "INSERT INTO products (product_name, product_price, product_qty, description,category, size, color) VALUES ('$product_name', '$product_price', '$product_qty','$description','$category', '$size', '$color')";
+        $sql = "INSERT INTO products (product_name, product_price, product_qty, description,category, size, color) VALUES ('$product_name', '$product_price', '$product_qty','$descriptions','$category', '$size_list', '$color_list')";
         mysqli_query($conn, $sql);
     } catch (mysqli_sql_exception) {
         echo 'server error';

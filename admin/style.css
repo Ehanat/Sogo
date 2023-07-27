@@ -1,0 +1,11 @@
+.color label{
+    width: 40px;
+    height: 15px;
+    border: 1px solid #b5b5b5;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.scales{
+    height: 300px;
+}

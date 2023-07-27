@@ -22,6 +22,7 @@ $category_result = $conn->query($category_sql);
     <title>Dashboard - SB Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <style>
         tbody a {
@@ -86,12 +87,84 @@ $category_result = $conn->query($category_sql);
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Өлшемі" name="size">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Размер
+                                                            </button>
+                                                            <ul class="scales dropdown-menu ps-4 overflow-auto">
+                                                                <?php
+                                                                for ($i = 35; $i <= 40; $i++) { ?>
+                                                                    <div>
+                                                                        <input type="checkbox" id="scales" name="scales[]" value="<?php echo $i ?>">
+                                                                        <label for="scales"><?php echo $i ?></label>
+                                                                    </div>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                                <div>
+                                                                    <input type="checkbox" id="scales" name="scales[]" value="S">
+                                                                    <label for="scales">S</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="scales" name="scales[]" value="M">
+                                                                    <label for="scales">M</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="scales" name="scales[]" value="L">
+                                                                    <label for="scales">L</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="scales" name="scales[]" value="XL">
+                                                                    <label for="scales">XL</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="scales" name="scales[]" value="2XL">
+                                                                    <label for="scales">2XL</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="scales" name="scales[]" value="3XL">
+                                                                    <label for="scales">3XL</label>
+                                                                </div>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Түсі" name="color">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Түсі
+                                                            </button>
+                                                            <ul class="color dropdown-menu ps-4 overflow-auto">
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="white">
+                                                                    <label for="Colors" style="background: white"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="black">
+                                                                    <label for="Colors" style="background: black"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="blue">
+                                                                    <label for="Colors" style="background: blue"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="yellow">
+                                                                    <label for="Colors" style="background: yellow"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="red">
+                                                                    <label for="Colors" style="background: red"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="skyblue">
+                                                                    <label for="Colors" style="background: skyblue"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="green">
+                                                                    <label for="Colors" style="background: green"></label>
+                                                                </div>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-
                                                 </div>
                                                 <div class="mb-3">
                                                     <textarea class="form-control" placeholder="Өнім Сипаттамасы" name="description"></textarea>

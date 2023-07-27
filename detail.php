@@ -6,6 +6,16 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM products WHERE id = $id";
     $products = $conn->query($sql);
     $product = $products->fetch_assoc();
+    $size_list = $product['size'];
+    if ($size_list[0] === ',') {
+        $size_list = substr($size_list, 1);
+    }
+    $size_arr = explode(',', $size_list);
+    $color_list = $product['color'];
+    if ($color_list[0] === ',') {
+        $color_list = substr($color_list, 1);
+    }
+    $color_arr = explode(',', $color_list);
 }
 ?>
 <!DOCTYPE html>
@@ -77,44 +87,42 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="single-pro-details">
-                <h4>
+                <h4 class="mb-4">
                     <?php echo $product['product_name'] ?>
                 </h4>
-                <h2>
-                    <?php echo $product['product_price'] ?>тг
-                </h2>
-                <div class="mt-3">
-                    <select>
-                        <option>Select Size</option>
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
-                        <option>XXL</option>
-                    </select>
+                <div class="bg-light px-3 py-2">
+                    <h2 class="detail_page_price">
+                        <?php echo $product['product_price'] ?>тг
+                    </h2>
+                </div>
+                <div class="mt-3 detail_size">
+                    <span class="title me-3">Резмер</span>
+                    <?php foreach ($size_arr as $size) { ?>
+                        <div class="size px-4 py-1 prevent-select unselect_size"><?php echo $size ?></div>
+                    <?php } ?>
                 </div>
                 <div class="color-content">
-                    <h4>Select Color</h4>
-                    <div class="color-groups">
-                        <div class="color color-white active-color"></div>
-                        <div class="color color-black"></div>
-                        <div class="color color-red"></div>
-                        <div class="color color-blue"></div>
-                        <div class="color color-yellow"></div>
+                    <div class="title me-5">Түсті</div>
+                    <div class="color-groups prevent-select">
+                        <?php foreach ($color_arr as $color) { ?>
+                            <div class="color color-<?php echo $color ?>"></div>
+                        <?php } ?>
                     </div>
                 </div>
 
-                <div class="mt-3">
-                    <span class="fs-6">Quantity</span>
+                <div class="mt-3 mb-3">
+                    <span>Саны</span>
                     <input type="number" value="1">
                 </div>
+                <div>
+                    <div class="fw-semibold mb-1">Өнім мәліметтері</div>
+                    <pre class="text-secondary">
+                        <?php echo $product['description'] ?>
+                    </pre>
 
-                <h4>Product Details</h4>
-                <span>
-                    <?php echo $product['description'] ?>
-                </span>
+                </div>
                 <div class="mt-4">
-                    <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-cart-plus me-2" aria-hidden="true"></i>Сақтау</button>
+                    <button type="button" class="btn btn-sm px-4 py-2"><i class="fa fa-cart-plus me-2" aria-hidden="true"></i>Сақтау</button>
                 </div>
             </div>
         </section>
@@ -140,6 +148,7 @@ if (isset($_GET['id'])) {
 
         // Color
         const COLOR_BTNS = document.querySelectorAll('.color');
+        const size_btn = document.querySelectorAll('.size');
         COLOR_BTNS.forEach(color => {
             color.addEventListener('click', () => {
                 let colorNameClass = color.className;
@@ -151,12 +160,29 @@ if (isset($_GET['id'])) {
                 }
             });
         })
+        size_btn.forEach(size => {
+            size.addEventListener('click', () => {
+                let sizeNameClass = size.className;
+                if (!size.classList.contains('select_size')) {
+                    resetSizebtns();
+                    size.classList.add('select_size');
+                    size.classList.remove('unselect_size');
+                }
+            })
+        })
 
         //resetting all color btns
         function resetActiveBtns() {
             COLOR_BTNS.forEach(color => {
                 color.classList.remove('active-color');
             });
+        }
+
+        function resetSizebtns() {
+            size_btn.forEach(size => {
+                size.classList.remove('select_size');
+                size.classList.add('unselect_size');
+            })
         }
     </script>
 
