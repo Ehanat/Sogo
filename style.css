@@ -1,8 +1,98 @@
 .prevent-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-  }
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    color: rgba(0, 0, 0, .8);
+    background-color: #f5f5f5;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+form {
+    padding: 0;
+    margin: 0;
+}
+
+/* category  */
+.category {
+    z-index: 3;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    height: 3rem;
+}
+
+.category ul {
+    padding: 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.category li {
+    line-height: 3rem;
+    text-align: center;
+    float: left;
+    font-weight: 400;
+    user-select: none;
+    cursor: pointer;
+    width: 6.25rem;
+}
+
+.category li:hover {
+    border-bottom: 3px solid #e38472;
+}
+
+.selected_category {
+    border-bottom: 3px solid #ee4d2d;
+}
+
+
+/* product_list  */
+.product_list {
+    clear: both;
+}
+
+.card-body {
+    position: relative;
+}
+
+.product_list .card:hover {
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+    bottom: 1px;
+}
+
+.card-body .product_name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2.25rem;
+    line-height: 1.125rem;
+    -webkit-line-clamp: 2;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+}
+
+
+
+
 .card-img-top {
     /* Adjust the desired height here */
     object-fit: contain;
@@ -16,13 +106,49 @@
     color: #ee4d2d;
 }
 
-
-
 .add-cart {
     color: #ee4d2d;
     background-color: rgba(255, 87, 34, .1);
     border: 1px solid #746d6b;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .03);
+    height: 30px;
+    width: 100px;
+    position: relative;
+}
+
+.add-cart:hover {
+    color: #fff;
+    background-color: #ee4d2d;
+}
+
+.clicked {
+    background-color: greenyellow;
+}
+
+.add-cart .buttonload {
+    width: 100%;
+    height: 100%;
+    background-color: #04AA6D;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 30px;
+    border: none;
+    display: none;
+}
+
+.add-cart .btnCheck {
+    width: 100%;
+    height: 100%;
+    background-color: #04AA6D;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 30px;
+    border: none;
+    display: none;
 }
 
 .add-cart i,
@@ -33,7 +159,6 @@
 /* Single product details */
 #prodetails {
     display: flex;
-    margin-top: 20px;
 }
 
 #prodetails .single-pro-image {
@@ -41,27 +166,49 @@
     margin-right: 50px;
 }
 
+.single-pro-image .big_area {
+    width: 100%;
+    height: 400px;
+}
+
+.single-pro-image video {
+    height: 100%;
+    width: 100%;
+}
+
 .single-pro-image img {
     width: 100%;
-    height: 450px;
+    height: 100%;
     object-fit: cover;
 }
 
 .small-img-group {
     display: flex;
     justify-content: space-between;
-}
-
-.small-img-col img {
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
+    height: 100px;
+    clear: both;
 }
 
 .small-img-col {
     flex-basis: 24%;
     cursor: pointer;
+    width: 100%;
 }
+
+.small-img-col:hover {
+    border: 2px solid #ee4d2d;
+}
+
+.small-img-col video {
+    width: 100%;
+    height: 100%;
+}
+
+.small-img-col img {
+    width: 100%;
+    object-fit: cover;
+}
+
 
 #prodetails .single-pro-details {
     width: 50%;
@@ -78,7 +225,22 @@
     height: 2rem;
     text-align: center;
     font-size: 1rem;
-    margin-left: 30px;
+    margin: 0;
+    float: left;
+    border: 1px solid #000;
+    border-left: none;
+    border-right: none;
+}
+
+.qty .btns {
+    width: 30px;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid #000;
+    float: left;
 }
 
 #prodetails .single-pro-details input:focus {
@@ -91,7 +253,7 @@
     border: 1px solid #ee4d2d;
 }
 
-#prodetails .single-pro-details button:hover{
+#prodetails .single-pro-details button:hover {
     background-color: #ee4d2d;
     color: #fff;
 }
@@ -100,11 +262,12 @@
 /* Color */
 .color-content {
     margin-top: 1rem;
-    height: 35px;
 }
-.color-content .title{
+
+.color-content .title {
     line-height: 35px;
 }
+
 .color-content h4 {
     text-transform: capitalize;
     font-size: 1.6rem;
@@ -115,9 +278,10 @@
     height: 35px;
     background: none;
     border-radius: 50%;
-    margin-right: 12px;
+    display: inline-block;
     cursor: pointer;
     transition: all 0.5 ease;
+    background-clip: content-box;
 }
 
 .color-black {
@@ -139,10 +303,12 @@
 .color-white {
     background-color: #ededed;
 }
-.color-skyblue{
+
+.color-skyblue {
     background-color: skyblue;
 }
-.color-green{
+
+.color-green {
     background-color: green;
 }
 
@@ -152,15 +318,11 @@
 
 .active-color {
     box-shadow: 0 0 10px 0 rgba(19, 23, 34, 0.6);
-    width: 45px;
-    height: 45px;
     border: 1px solid orangered;
+    padding: 3px;
 }
 
-.color-groups {
-    display: flex;
-    justify-content:baseline;
-}
+
 
 /* Media size */
 @media screen and (max-width: 477px) {
@@ -189,33 +351,86 @@
 
 
 
-.color-content .title{
+.color-content .title {
     float: left;
 }
-.color-groups{
+
+.color-groups {
     float: left;
 }
 
 
 /* size  */
 
-.detail_page_price{
+.detail_page_price {
     color: #ee4d2d;
 }
 
 
-.detail_size div{
+.detail_size div {
     display: inline-block;
     font-size: 1rem;
+    margin-bottom: 5px;
 }
-.unselect_size{
-    border:1px solid #ccc;
+
+.unselect_size {
+    border: 1px solid #ccc;
 }
-.detail_size div:hover{
-    border:1px solid#ee4d2d;
+
+.detail_size div:hover {
+    border: 1px solid#ee4d2d;
     cursor: pointer;
 }
 
 .select_size {
     border: 1px solid #ee4d2d;
+}
+
+/* cart  */
+table {
+    text-align: center;
+    background-color: #fff;
+}
+
+table td {
+    line-height: 60px;
+}
+
+/* popup form  */
+#popup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #000;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+#popup .card {
+    width: 300px;
+    height: 300px;
+    padding: 40px;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+}
+
+.close {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.fa-trash-can {
+    cursor: pointer;
 }

@@ -17,6 +17,7 @@ if (isset($_GET['id'])) {
     }
     $color_arr = explode(',', $color_list);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,7 @@ if (isset($_GET['id'])) {
 
 <body>
     <!-- navbar  -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
         <div class="container-lg mx-auto">
             <a class="navbar-brand" href="index.php">
                 <span class="navbar-brand-text text-white">SOGO</span>
@@ -67,11 +68,16 @@ if (isset($_GET['id'])) {
 
 
     <!-- Details -->
-    <div class="container mt-5">
+    <div class="container mb-5">
         <section id="prodetails" class="section-p1">
             <div class="single-pro-image">
-                <img class="mb-2" src="./assets/uploads/<?php echo $product['image1'] ?>" width="100%" id="MainImg" alt="">
+                <div class="big_area mb-2">
+                    <video controls autoplay muted src="./assets/uploads/<?php echo $product['video'] ?>"></video>
+                </div>
                 <div class="small-img-group">
+                    <div class="small-img-col">
+                        <video src="./assets/uploads/<?php echo $product['video'] ?>" class="small_video"></video>
+                    </div>
                     <div class="small-img-col">
                         <img src="./assets/uploads/<?php echo $product['image1'] ?>" width="100%" class="small-img" alt="">
                     </div>
@@ -87,109 +93,72 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="single-pro-details">
-                <h4 class="mb-4">
-                    <?php echo $product['product_name'] ?>
-                </h4>
-                <div class="bg-light px-3 py-2">
-                    <h2 class="detail_page_price">
-                        <?php echo $product['product_price'] ?>тг
-                    </h2>
-                </div>
-                <div class="mt-3 detail_size">
-                    <span class="title me-3">Резмер</span>
-                    <?php foreach ($size_arr as $size) { ?>
-                        <div class="size px-4 py-1 prevent-select unselect_size"><?php echo $size ?></div>
-                    <?php } ?>
-                </div>
-                <div class="color-content">
-                    <div class="title me-5">Түсті</div>
-                    <div class="color-groups prevent-select">
-                        <?php foreach ($color_arr as $color) { ?>
-                            <div class="color color-<?php echo $color ?>"></div>
-                        <?php } ?>
+                <form action="addToCart.php" method="post" id="addToCard_form">
+                    <input name="product_id" class="product_id" type="number" hidden value="<?php echo $product['id'] ?>">
+                    <input type="text" name="img" value="<?php echo $product['image1'] ?>" hidden>
+                    <h4 class="mb-4">
+                        <?php echo $product['product_name'] ?>
+                        <input type="text" hidden value="<?php echo $product['product_name'] ?>" name="product_name">
+                    </h4>
+                    <div class="bg-light px-3 py-2">
+                        <h2 class="detail_page_price">
+                            <?php echo $product['product_price'] ?>тг
+                        </h2>
+                        <input type="text" hidden value="<?php echo $product['product_price'] ?>" name="product_price">
                     </div>
-                </div>
+                    <div class="mt-3 detail_size row">
+                        <p class="title col-2">Резмер</p>
+                        <section class="col-9">
+                            <?php foreach ($size_arr as $size) { ?>
+                                <div class="size px-4 py-1 prevent-select unselect_size"><?php echo $size ?></div>
+                            <?php } ?>
+                        </section>
+                    </div>
+                    <input type="text" hidden class="product_size" name="product_size" value="">
+                    <div class="color-content row">
+                        <p class="title col-2">Түсті</p>
+                        <div class="col-9">
+                            <div class="color-groups prevent-select">
+                                <?php foreach ($color_arr as $color) { ?>
+                                    <div class="color mx-1 color-<?php echo $color ?>"></div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" hidden class="product_color" name="product_color">
+                    <div class="qty mt-3 mb-3 row prevent-select">
+                        <p class="col-2">Саны</p>
+                        <div class="col-9">
+                            <div class=" btns minus"><i class="fa-solid fa-minus"></i></div>
+                            <input class="product_qty" type="number" name="product_qty" value="1">
+                            <div class="btns plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                    </div>
+                    <div class="error my-3">
 
-                <div class="mt-3 mb-3">
-                    <span>Саны</span>
-                    <input type="number" value="1">
-                </div>
-                <div>
-                    <div class="fw-semibold mb-1">Өнім мәліметтері</div>
-                    <pre class="text-secondary">
-                        <?php echo $product['description'] ?>
-                    </pre>
-
-                </div>
-                <div class="mt-4">
-                    <button type="button" class="btn btn-sm px-4 py-2"><i class="fa fa-cart-plus me-2" aria-hidden="true"></i>Сақтау</button>
-                </div>
+                    </div>
+                    <div class="mt-4">
+                        <button name="add_card" type="submit" class="addToCardBtn btn btn-sm px-4 py-2"><i class="fa fa-cart-plus me-2" aria-hidden="true"></i>Сақтау</button>
+                    </div>
+                </form>
             </div>
+
         </section>
     </div>
+    <div class="container description">
+        <div class="fw-semibold mb-1 fs-4">Өнім деректері</div>
+        <pre class="product_description text-secondary">
+                    <?php echo $product['description'] ?>
+                </pre>
 
-    <script>
-        // Details
-        var MainImg = document.getElementById("MainImg");
-        var smallimg = document.getElementsByClassName("small-img");
+    </div>
 
-        smallimg[0].onclick = function() {
-            MainImg.src = smallimg[0].src;
-        }
-        smallimg[1].onclick = function() {
-            MainImg.src = smallimg[1].src;
-        }
-        smallimg[2].onclick = function() {
-            MainImg.src = smallimg[2].src;
-        }
-        smallimg[3].onclick = function() {
-            MainImg.src = smallimg[3].src;
-        }
-
-        // Color
-        const COLOR_BTNS = document.querySelectorAll('.color');
-        const size_btn = document.querySelectorAll('.size');
-        COLOR_BTNS.forEach(color => {
-            color.addEventListener('click', () => {
-                let colorNameClass = color.className;
-                if (!color.classList.contains('active-color')) {
-                    let colorName = colorNameClass.slice(colorNameClass.indexOf('-') + 1, colorNameClass.length);
-                    resetActiveBtns();
-                    color.classList.add('active-color');
-
-                }
-            });
-        })
-        size_btn.forEach(size => {
-            size.addEventListener('click', () => {
-                let sizeNameClass = size.className;
-                if (!size.classList.contains('select_size')) {
-                    resetSizebtns();
-                    size.classList.add('select_size');
-                    size.classList.remove('unselect_size');
-                }
-            })
-        })
-
-        //resetting all color btns
-        function resetActiveBtns() {
-            COLOR_BTNS.forEach(color => {
-                color.classList.remove('active-color');
-            });
-        }
-
-        function resetSizebtns() {
-            size_btn.forEach(size => {
-                size.classList.remove('select_size');
-                size.classList.add('unselect_size');
-            })
-        }
-    </script>
-
+    <?php require_once("footer.html") ?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

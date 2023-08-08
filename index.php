@@ -64,28 +64,12 @@ if (isset($_GET['category'])) {
             .card-img-top {
                 height: 200px;
             }
-
-            .card-title {
-                font-size: 16px;
-            }
-
-            .product_name {
-                height: 38px;
-            }
         }
 
         /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
         @media screen and (max-width: 600px) {
             .card-img-top {
                 height: 150px;
-            }
-
-            .card-title {
-                font-size: 12px;
-            }
-
-            .product_name {
-                height: 28px;
             }
         }
 
@@ -96,7 +80,7 @@ if (isset($_GET['category'])) {
 
 </head>
 
-<body class="bg-light">
+<body>
     <!-- navbar  -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-lg mx-auto">
@@ -128,10 +112,10 @@ if (isset($_GET['category'])) {
 
 
 
-    <!-- banner  -->
-    <div class="container mt-3">
+    <div class="container">
 
-        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <!-- banner  -->
+        <div id="demo" class="my-3 carousel slide" data-bs-ride="carousel">
 
             <!-- The slideshow/carousel -->
             <div class="carousel-inner">
@@ -154,13 +138,10 @@ if (isset($_GET['category'])) {
                 <span class="carousel-control-next-icon"></span>
             </button>
         </div>
-    </div>
 
-
-    <!-- category  -->
-    <nav id="category" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar mx-auto">
+        <!-- category  -->
+        <nav class="category">
+            <ul>
                 <?php
                 // Query database to get category
                 $category_result = mysqli_query($conn, "SELECT * FROM category");
@@ -168,15 +149,13 @@ if (isset($_GET['category'])) {
                 // Loop through products and display them in cards
                 while ($category = mysqli_fetch_assoc($category_result)) {
                 ?>
-                    <a class="nav-link mx-3" href="?category=<?php echo $category['category'] ?>" style="font-family: 'tahoma';"><?php echo strtoupper($category['category']) ?></a> <i>|</i>
+                    <li><a class="nav-link mx-3" href="?category=<?php echo $category['category'] ?>" style="font-family: 'tahoma';"><?php echo strtoupper($category['category']) ?></a> </li>
                 <?php } ?>
-            </div>
-        </div>
-    </nav>
+            </ul>
+        </nav>
 
-
-    <div class="container">
-        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4">
+        <!-- product list  -->
+        <div class="product_list row row-cols-2 row-cols-md-4 row-cols-lg-5 g-3 mb-3">
             <?php
             // Loop through products and display them in cards
             while ($product = $result->fetch_assoc()) {
@@ -184,18 +163,30 @@ if (isset($_GET['category'])) {
                 <a href="detail.php?id=<?php echo $product['id'] ?>">
                     <form id="From" action="addToCart.php" method="post">
                         <div class="col">
-                            <div class="card pt-2 ps-2 pe-2">
-                                <img src="assets/uploads/<?php echo $product['image1']; ?>" class="card-img-top img-fluid" alt="<?php echo $product['product_name']; ?>">
+                            <div class="card">
+                                <div>
+                                    <img src="assets/uploads/<?php echo $product['image1']; ?>" class="card-img-top img-fluid" alt="<?php echo $product['product_name']; ?>">
+                                </div>
 
-                                <div class="card-body text-center">
-                                    <div class="product_name" style="overflow: hidden;">
-                                        <h6 class="card-title"><?php echo $product['product_name']; ?></h6>
+                                <div class="card-body px-3 py-2">
+                                    <div class="product_name">
+                                        <span class="card-title"><?php echo $product['product_name']; ?></span>
                                     </div>
-                                    <h6 class="card-subtitle mb-3"><?php echo $product['product_price']; ?>тг</h6>
+                                    <h6 class="card-subtitle pt-2"><?php echo $product['product_price']; ?>тг</h6>
                                     <input type="hidden" value="<?= $product['id'] ?>" name="product_id">
                                     <input type="hidden" value="<?= $product['product_price'] ?>" name="product_price">
                                     <input type="hidden" value="<?= $product['product_name'] ?>" name="product_name">
-                                    <button class="add-cart btn"><i class="fa fa-cart-plus" aria-hidden="true"></i><span>Сақтау</span></button>
+                                    <!-- <button class="add-cart mt-2">
+                                        <div>
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i><span>Сақтау</span>
+                                        </div>
+                                        <div class="buttonload">
+                                            <i class="fa fa-spinner fa-spin text-center"></i>
+                                        </div>
+                                        <div class="btnCheck">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+                                    </button> -->
                                 </div>
                             </div>
                         </div>
@@ -205,42 +196,12 @@ if (isset($_GET['category'])) {
             }
             ?>
         </div>
-
     </div>
+
     <?php require_once("footer.html") ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".add-cart").click(function(e) {
-                event.preventDefault();
-
-                var $card = $(this).closest(".card");
-                var $inputField = $(this).siblings(".input-field");
-                var $buttonText = $(this).find("span");
-
-                // For some browsers, `attr` is undefined; for others,
-                // `attr` is false.  Check for both.
-                $inputField.attr("type", "number");
-                $(this).prop("hidden", true);
-                $card.find('.confirm-add-cart').prop("hidden", false);
-            });
-            $(".confirm-add-cart").click(function(e) {
-                var $card = $(this).closest(".card");
-
-                var $inputField = $(this).siblings(".input-field");
-                var $icon = $(this).siblings(".fa-cart-plus");
-                var $text = $(this).find("span");
-
-                $text.text("Сақталды");
-                $icon.remove();
-
-                $inputField.attr("type", "hidden");
-                // Submit the form within the card
-                $card.find('form').submit();
-            })
-        });
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 
