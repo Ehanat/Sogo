@@ -3,7 +3,7 @@ require_once('../db.php');
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
 ?>
-<div id="product_list" class="card my-4">
+<div id="product_list" class="card my   -4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
         Тауарлар
@@ -21,17 +21,6 @@ $result = $conn->query($sql);
                     <th>Әрекет</th>
                 </tr>
             </thead>
-            <!-- <tfoot>
-                <tr>
-                    <th>No.</th>
-                    <th>Фото</th>
-                    <th>Аты</th>
-                    <th>Бағасы</th>
-                    <th>Саны/Қорап</th>
-                    <th>Каталог</th>
-                    <th>Әрекет</th>
-                </tr>
-            </tfoot> -->
             <tbody>
                 <?php
                 $i = 1;

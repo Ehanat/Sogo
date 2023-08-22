@@ -1,55 +1,52 @@
 <?php
 require_once('../db.php');
-$sql = "SELECT * FROM orders INNER JOIN products ON orders.product_id = products.id";
+$sql = "SELECT * FROM orders ";
 $result = $conn->query($sql);
+$phones = array();
+while ($row = $result->fetch_assoc()) {
+    $phone = $row['phone'];
+    array_push($phones, $phone);
+}
 ?>
+<style>
+    table tr {
+        cursor: pointer;
+    }
+</style>
 <div id="product_list" class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
         Тапсырыстар
     </div>
     <div class="card-body">
-        <table id="datatablesSimple" class="table">
+        <table id="datatablesSimple" class="table table-hover">
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Фото</th>
-                    <th>Аты</th>
-                    <th>Түс</th>
-                    <th>Саны</th>
-                    <th>Өлшем</th>
                     <th>Телефон</th>
-                    <th>Мекенжай</th>
-                    <th>Жалпы</th>
+                    <th>Тапсырыстар саны</th>
+                    <th>Detail</th>
                 </tr>
             </thead>
-
             <tbody>
-                <?php
-                $i = 1;
-
-                while ($row = $result->fetch_assoc()) {
-
-
-                    echo
-                    "<tr>
-                        <td> #" . $i . "</td>
-                        <td><img src='../assets/uploads/" . $row['image1'] . "' width='50px'></td>
-                        <td>" . $row['product_name'] . "</td>
-                        <td>" . $row['order_color'] . "</td>
-                        <td>" . $row['qty'] . "</td>
-                        <td> " . $row['order_size'] . "</td>
-                        <td>" . $row['phone'] . "</td>
-                        <td>" . $row['address'] . "</td>
-                        <td>" . $row['product_price'] * $row['qty']  . " тг</td>
-                        
-                    </tr>";
-                    $i++;
-                }
-                ?>
+                <form action="order_detail.php" method="get">
+                    <?php
+                    $i = 1;
+                    $countes = array_count_values($phones);
+                    foreach ($countes as $key => $val) {
+                        echo
+                        "
+                        <tr>
+                            <td> #" . $i . "</td>
+                            <td>" . $key . "</td>
+                            <td>" . $val . "</td>
+                            <td><a style='color: blue' href='order_detail.php?phone=" . $key . "'>Detail</a></td>
+                        </tr>";
+                        $i++;
+                    }
+                    ?>
+                </form>
             </tbody>
         </table>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-<script src="js/datatables-simple-demo.js"></script>

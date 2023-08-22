@@ -22,6 +22,6 @@ if (isset($_GET['delete_id'])) {
 
     $delete_sql = "DELETE FROM products WHERE id='$product_id';";
     $delete = mysqli_query($conn, $delete_sql);
-    header("Location:index.php");
+    header("Location:product_list.php");
     exit();
 }

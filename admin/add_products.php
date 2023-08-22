@@ -19,7 +19,7 @@ $category_result = $conn->query($category_sql);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Өнімді қосыңыз</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
@@ -133,14 +133,14 @@ $category_result = $conn->query($category_sql);
                                                             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 Түсі
                                                             </button>
-                                                            <ul class="color dropdown-menu ps-4 overflow-auto">
-                                                                <div>
-                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="white">
-                                                                    <label for="Colors" style="background: white"></label>
-                                                                </div>
+                                                            <ul class="dropdown-menu ps-4 overflow-auto color">
                                                                 <div>
                                                                     <input type="checkbox" id="Colors" name="Colors[]" value="black">
                                                                     <label for="Colors" style="background: black"></label>
+                                                                </div>
+                                                                <div>
+                                                                    <input type="checkbox" id="Colors" name="Colors[]" value="white">
+                                                                    <label for="Colors" style="background: white"></label>
                                                                 </div>
                                                                 <div>
                                                                     <input type="checkbox" id="Colors" name="Colors[]" value="blue">

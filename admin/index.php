@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -63,7 +63,10 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                     </div>
-                    <?php include_once("orders.php") ?>
+
+                    <?php
+                    include_once("orders.php")
+                    ?>
                 </div>
             </main>
             <?PHP require_once("../footer.html") ?>

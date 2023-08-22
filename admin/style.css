@@ -1,4 +1,4 @@
-.color label{
+.color label {
     width: 40px;
     height: 15px;
     border: 1px solid #b5b5b5;
@@ -6,6 +6,52 @@
     margin-left: 5px;
 }
 
-.scales{
+.scales {
     height: 300px;
+}
+
+.color {
+    /* width: 30px;
+    height: 30px; */
+    background: none;
+    /* display: inline-block; */
+    transition: all 0.5 ease;
+    background-clip: content-box;
+}
+
+.color-detail {
+    width: 30px;
+    height: 30px;
+    background: none;
+    display: inline-block;
+    transition: all 0.5 ease;
+    background-clip: content-box;
+}
+
+.color-black {
+    background-color: #000;
+}
+
+.color-blue {
+    background-color: #0013FF;
+}
+
+.color-yellow {
+    background-color: #FFF300;
+}
+
+.color-red {
+    background-color: #FF0000;
+}
+
+.color-white {
+    background-color: #ededed;
+}
+
+.color-skyblue {
+    background-color: skyblue;
+}
+
+.color-green {
+    background-color: green;
 }

@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (isset($_SESSION['cart'])) {
     $max = sizeof($_SESSION['cart']);
 }
@@ -25,19 +24,21 @@ if (isset($_POST['submit'])) {
                 $qty = $val;
             }
         }
-        $order_sql = "INSERT INTO orders (product_id, color, size, qty, phone, address)
+        $order_sql = "INSERT INTO orders (product_id, order_color, order_size, qty, phone, address)
                             VALUES ('$product_id', '$color', '$size', '$qty', '$phone', '$address')";
         $conn->query($order_sql);
+        unset($_SESSION['cart']);
+        session_destroy();
     }
 }
 
 // TODO: remove selected item
 if (isset($_POST['remove'])) {
-
     unset($_SESSION['cart']);
     session_destroy();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +49,7 @@ if (isset($_POST['remove'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/c4832607e6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Card</title>
+    <title>Cart</title>
     <style>
         .fa-circle-info {
             color: red;
@@ -65,7 +66,6 @@ if (isset($_POST['remove'])) {
 </head>
 
 <body>
-
     <!-- navbar  -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-lg mx-auto">
@@ -78,7 +78,7 @@ if (isset($_POST['remove'])) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contact us</a>
+                        <a class="nav-link text-white" href="#"></a>
                     </li>
                     <li class="nav-item">
 
@@ -156,11 +156,8 @@ if (isset($_POST['remove'])) {
                         <?php } ?>
                     </tbody>
                 </table>
-                <div class="row">
-                    <button class="btn btn-primary col me-3" onclick="openForm()">Жіберу</button>
-                    <button class="btn btn-danger col ms-3" name="remove">Жою</button>
-                </div>
-                <div id="popup">
+
+                <div id="popup" style="display: none;">
                     <div class="card">
                         <label for="phone">Телефон</label>
                         <input type="text" name="phone">
@@ -174,6 +171,12 @@ if (isset($_POST['remove'])) {
                 </div>
             </form>
         <?php } ?>
+        <div class="row">
+            <button class="btn btn-primary col me-3" onclick="openForm()">Жіберу</button>
+            <form action="#" method="post" class="col ms-3">
+                <button class="btn btn-danger" name="remove" style="width:100%;">Жою</button>
+            </form>
+        </div>
     </div>
     </div>
 
@@ -182,28 +185,12 @@ if (isset($_POST['remove'])) {
     <script>
         function openForm() {
             document.getElementById("popup").style.display = "block";
+            console.log('hello');
         }
 
         function closeFrom() {
             document.getElementById("popup").style.display = "none";
         }
-
-        // let deletes = document.getElementsByClassName("delete")
-        // for (let del of deletes) {
-        //     del.addEventListener("click", (e) => {
-        //         let i = e.target.parentNode.parentNode.firstElementChild.innerHTML
-        //         fetch("./delete_cart.php", {
-        //             method: 'POST',
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //             body: JSON.stringify({
-        //                 id: 'hello'
-        //             })
-        //         })
-        //     })
-
-        // }
     </script>
 
 </body>
